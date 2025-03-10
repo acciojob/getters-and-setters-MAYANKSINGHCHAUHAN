@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Class Hierarchy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <h1>Person Class Hierarchy</h1>
+    <button onclick="testPersons()">Test Persons</button>
+    <div class="output" id="output"></div>
+    
+    <script>
+        class Person {
+            constructor(name, age) {
+                this._name = name;
+                this._age = age;
+            }
+            get name() {
+                return this._name;
+            }
+            get age() {
+                return this._age;
+            }
+            set age(newAge) {
+                this._age = newAge;
+            }
+        }
 
+        class Student extends Person {
+            study() {
+                console.log(`${this.name} is studying`);
+                document.getElementById("output").innerText += `${this.name} is studying\n`;
+            }
+        }
+
+        class Teacher extends Person {
+            teach() {
+                console.log(`${this.name} is teaching`);
+                document.getElementById("output").innerText += `${this.name} is teaching\n`;
+            }
+        }
+
+        function testPersons() {
+            document.getElementById("output").innerText = "";
+            const person = new Person("John", 25);
+            console.log(person.name);
+            person.age = 30;
+            console.log(person.age);
+
+            const student = new Student("Alice", 22);
+            student.study();
+
+            const teacher = new Teacher("Bob", 40);
+            teacher.teach();
+        }
+    </script>
 </body>
-
 </html>
