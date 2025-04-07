@@ -1,71 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Person Class Hierarchy</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        .output {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Person, Student, Teacher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      margin: 10px 5px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .output {
+      margin-top: 20px;
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-    <h1>Person Class Hierarchy</h1>
-    <button onclick="testPersons()">Test Persons</button>
-    <div class="output" id="output"></div>
-    
-    <script>
-        class Person {
-            constructor(name, age) {
-                this._name = name;
-                this._age = age;
-            }
-            get name() {
-                return this._name;
-            }
-            get age() {
-                return this._age;
-            }
-            set age(newAge) {
-                this._age = newAge;
-            }
-        }
 
-        class Student extends Person {
-            study() {
-                console.log(`${this.name} is studying`);
-                document.getElementById("output").innerText += `${this.name} is studying\n`;
-            }
-        }
+  <h1>Person, Student, and Teacher Demo</h1>
 
-        class Teacher extends Person {
-            teach() {
-                console.log(`${this.name} is teaching`);
-                document.getElementById("output").innerText += `${this.name} is teaching\n`;
-            }
-        }
+  <button onclick="testPerson()">Test Person</button>
+  <button onclick="testStudent()">Test Student</button>
+  <button onclick="testTeacher()">Test Teacher</button>
 
-        function testPersons() {
-            document.getElementById("output").innerText = "";
-            const person = new Person("John", 25);
-            console.log(person.name);
-            person.age = 30;
-            console.log(person.age);
+  <div class="output" id="output"></div>
 
-            const student = new Student("Alice", 22);
-            student.study();
+  <script>
+    // Person class
+    class Person {
+      constructor(name, age) {
+        this._name = name;
+        this._age = age;
+      }
 
-            const teacher = new Teacher("Bob", 40);
-            teacher.teach();
-        }
-    </script>
+      // Getter for name
+      get name() {
+        return this._name;
+      }
+
+      // Getter for age
+      get age() {
+        return this._age;
+      }
+
+      // Setter for age
+      set age(age) {
+        this._age = age;
+      }
+    }
+
+    // Student class inherits Person
+    class Student extends Person {
+      study() {
+        return `${this.name} is studying`;
+      }
+    }
+
+    // Teacher class inherits Person
+    class Teacher extends Person {
+      teach() {
+        return `${this.name} is teaching`;
+      }
+    }
+
+    // Helper to display output
+    function display(message) {
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerHTML += `<p>${message}</p>`;
+    }
+
+    // Test functions
+    function testPerson() {
+      const person = new Person("John", 25);
+      display(`Name: ${person.name}`); // Getter for name
+      person.age = 30;                 // Setter for age
+      display(`Updated Age: ${person.age}`); // Getter for age
+    }
+
+    function testStudent() {
+      const student = new Student("Alice", 22);
+      display(student.study());
+    }
+
+    function testTeacher() {
+      const teacher = new Teacher("Bob", 40);
+      display(teacher.teach());
+    }
+  </script>
+
 </body>
 </html>
